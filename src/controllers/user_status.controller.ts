@@ -1,4 +1,5 @@
-import { Body, Controller, Delete, Get, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { UserStatus } from 'src/models/user_status';
 
 @Controller('user_status')
 export class UserStatusController {
@@ -6,23 +7,24 @@ export class UserStatusController {
     getAllUserStatus(){
         
     }
+
     @Get("/:id")
-    getOneUserStatus(){
+    getOneUserStatus(@Param('id') id: string){
 
     }
 
     @Post("/")
-    postUserStatus(@Body() body : any){
+    postUserStatus(@Body() body: UserStatus){
 
     }
 
     @Put("/:id")
-    putUserStatus(@Body() body : any){
+    putUserStatus(@Param('id') id: string, @Body() body: UserStatus){
 
     }
 
     @Delete("/:id")
-    deleteUserStatus(){
+    deleteUserStatus(@Param('id') id: string){
 
     }
 }
