@@ -1,11 +1,11 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
-import { UserStatus } from 'src/models/user_status';
+import { UserStatus } from 'src/models/user_status.entity';
 
 @Controller('user_status')
 export class UserStatusController {
+
     @Get("/")
-    getAllUserStatus(){
-        
+    async getAllUserStatus() {
     }
 
     @Get("/:id")
