@@ -1,4 +1,4 @@
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm"
+import { Column, CreateDateColumn, Entity, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
 import { User } from "./user.entity"
 
 @Entity()
@@ -18,6 +18,18 @@ export class UserStatus {
         nullable: true
     })
     description: string
+
+    @Column({
+        nullable: false,
+        default: true
+    })
+    active: boolean
+
+    @CreateDateColumn()
+        create_at: Date;
+    
+    @UpdateDateColumn()
+    updated_at: Date;
 
     @OneToOne(() => User, (user) => user.user_status)
     user: User;

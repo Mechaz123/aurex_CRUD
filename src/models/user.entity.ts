@@ -62,7 +62,7 @@ export class User {
     @UpdateDateColumn()
     updated_at: Date;
 
-    @OneToOne(() => UserStatus, {eager: true, cascade: true})
+    @OneToOne(() => UserStatus, {eager: true, cascade: true, nullable:false})
     @JoinColumn()
     user_status: UserStatus;
 }

@@ -1,7 +1,8 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm"
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
 
 @Entity()
 export class Role {
+    
     @PrimaryGeneratedColumn()
     id: number
 
@@ -16,6 +17,15 @@ export class Role {
     })
     description: string
 
+    @Column({
+        nullable: false,
+        default: true
+    })
+    active: boolean
+    
     @CreateDateColumn()
     created_at: Date
+
+    @UpdateDateColumn()
+    updated_at: Date;
 }

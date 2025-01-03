@@ -8,6 +8,8 @@ import { UserStatus } from './models/user_status.entity';
 import { User } from './models/user.entity';
 import { Role } from './models/role.entity';
 import { Permission } from './models/permission.entity';
+import { UserStatusService } from './services/user_status.service';
+import { RoleService } from './services/role.service';
 
 @Module({
   imports: [
@@ -25,13 +27,19 @@ import { Permission } from './models/permission.entity';
         database: configService.get<string>('DB_DATABASE'),
         entities: [UserStatus, Role, Permission, User],
         synchronize: true,
+        timezone: 'Z',
       }),
       inject: [ConfigService]
-    })
+    }),
+    TypeOrmModule.forFeature([UserStatus, Role]),
   ],
   controllers: [
-    UserStatusController, 
+    UserStatusController,
     RoleController,
     PermissionController],
+  providers: [
+    UserStatusService,
+    RoleService
+  ],
 })
-export class AppModule {}
+export class AppModule { }
