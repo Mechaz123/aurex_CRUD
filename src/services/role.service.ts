@@ -31,6 +31,9 @@ export class RoleService {
     async removeRole(id: number) {
         let RoleData = await this.roleRepository.findOneBy({ id });
         RoleData.active = false;
+        const nowDate = new Date();
+        nowDate.setHours(nowDate.getHours() - 5);
+        RoleData.updated_at = new Date(nowDate);
         return await this.updateRole(id, RoleData);
     }
 }

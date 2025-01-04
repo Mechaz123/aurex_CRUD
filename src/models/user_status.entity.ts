@@ -5,29 +5,29 @@ import { User } from "./user.entity"
 export class UserStatus {
 
     @PrimaryGeneratedColumn()
-    id: number
+    id: number;
 
     @Column({
         length: 45,
         nullable: false
     })
-    name: string
+    name: string;
 
     @Column({
-        length:255,
+        length: 255,
         nullable: true
     })
-    description: string
+    description: string;
 
     @Column({
         nullable: false,
         default: true
     })
-    active: boolean
+    active: boolean;
 
     @CreateDateColumn()
-        create_at: Date;
-    
+    create_at: Date;
+
     @UpdateDateColumn()
     updated_at: Date;
 

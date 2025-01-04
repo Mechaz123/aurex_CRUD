@@ -55,13 +55,13 @@ export class RoleController {
     async putRole(@Res() response: Response, @Param('id') id: string, @Body() body: Role) {
         try {
             const roleCreated = await this.roleService.findOneRole(+id);
-            if(roleCreated != null) {
+            if (roleCreated != null) {
                 const roleData = await this.roleService.updateRole(+id, body);
                 response.status(HttpStatus.OK);
-                response.json({ Data: roleData, Message: 'Role updated successfully.', Status: HttpStatus. OK, Success: true });
+                response.json({ Data: roleData, Message: 'Role updated successfully.', Status: HttpStatus.OK, Success: true });
             } else {
-                response.status(HttpStatus.INTERNAL_SERVER_ERROR);
-                response.json({ Data: {}, Message: 'Role not exist.', Status: HttpStatus.INTERNAL_SERVER_ERROR, Success: false });
+                response.status(HttpStatus.NOT_FOUND);
+                response.json({ Data: {}, Message: 'Role not exist.', Status: HttpStatus.NOT_FOUND, Success: false });
             }
         } catch (error) {
             response.status(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -74,12 +74,12 @@ export class RoleController {
     async deleteRole(@Res() response: Response, @Param('id') id: string) {
         try {
             const roleData = await this.roleService.removeRole(+id);
-            if(roleData != null){
+            if (roleData != null) {
                 response.status(HttpStatus.OK);
                 response.json({ Data: roleData, Message: 'Role was inactivated.', Status: HttpStatus.OK, Success: true });
             } else {
-                response.status(HttpStatus.INTERNAL_SERVER_ERROR);
-                response.json({ Data: {}, Message: 'Role not exist.', Status: HttpStatus.INTERNAL_SERVER_ERROR, Success: false });
+                response.status(HttpStatus.NOT_FOUND);
+                response.json({ Data: {}, Message: 'Role not exist.', Status: HttpStatus.NOT_FOUND, Success: false });
             }
         } catch (error) {
             response.status(HttpStatus.INTERNAL_SERVER_ERROR);

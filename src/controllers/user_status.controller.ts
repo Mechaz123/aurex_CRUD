@@ -55,15 +55,15 @@ export class UserStatusController {
     async putUserStatus(@Res() response: Response, @Param('id') id: string, @Body() body: Partial<UserStatus>) {
         try {
             const userStatusCreated = await this.userStatusService.findOneUserStatus(+id);
-            if(userStatusCreated != null) {
+            if (userStatusCreated != null) {
                 const userStatusData = await this.userStatusService.updateUserStatus(+id, body);
                 response.status(HttpStatus.OK);
-                response.json({ Data: userStatusData, Message: 'User status updated successfully.', Status: HttpStatus. OK, Success: true });
+                response.json({ Data: userStatusData, Message: 'User status updated successfully.', Status: HttpStatus.OK, Success: true });
             } else {
-                response.status(HttpStatus.INTERNAL_SERVER_ERROR);
-                response.json({ Data: {}, Message: 'User status not exist.', Status: HttpStatus.INTERNAL_SERVER_ERROR, Success: false });
+                response.status(HttpStatus.NOT_FOUND);
+                response.json({ Data: {}, Message: 'User status not exist.', Status: HttpStatus.NOT_FOUND, Success: false });
             }
-        } catch(error) {
+        } catch (error) {
             response.status(HttpStatus.INTERNAL_SERVER_ERROR);
             response.json({ Data: {}, Message: 'Internal server error.', Status: HttpStatus.INTERNAL_SERVER_ERROR, Success: false });
         }
@@ -71,17 +71,17 @@ export class UserStatusController {
     }
 
     @Delete("/:id")
-    async deleteUserStatus(@Res() response:Response, @Param('id') id: string) {
+    async deleteUserStatus(@Res() response: Response, @Param('id') id: string) {
         try {
             const userStatusData = await this.userStatusService.removeUserStatus(+id);
-            if(userStatusData != null){
+            if (userStatusData != null) {
                 response.status(HttpStatus.OK);
                 response.json({ Data: userStatusData, Message: 'User status was inactivated.', Status: HttpStatus.OK, Success: true });
             } else {
-                response.status(HttpStatus.INTERNAL_SERVER_ERROR);
-                response.json({ Data: {}, Message: 'User status not exist.', Status: HttpStatus.INTERNAL_SERVER_ERROR, Success: false });
+                response.status(HttpStatus.NOT_FOUND);
+                response.json({ Data: {}, Message: 'User status not exist.', Status: HttpStatus.NOT_FOUND, Success: false });
             }
-        } catch(error) {
+        } catch (error) {
             response.status(HttpStatus.INTERNAL_SERVER_ERROR);
             response.json({ Data: {}, Message: 'Internal server error.', Status: HttpStatus.INTERNAL_SERVER_ERROR, Success: false });
         }

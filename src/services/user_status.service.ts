@@ -31,6 +31,9 @@ export class UserStatusService {
     async removeUserStatus(id: number) {
         let UserStatusData = await this.userStatusRepository.findOneBy({ id });
         UserStatusData.active = false;
+        const nowDate = new Date();
+        nowDate.setHours(nowDate.getHours() - 5);
+        UserStatusData.updated_at = new Date(nowDate);
         return await this.updateUserStatus(id, UserStatusData);
     }
 }

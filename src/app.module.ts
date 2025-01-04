@@ -10,6 +10,12 @@ import { Role } from './models/role.entity';
 import { Permission } from './models/permission.entity';
 import { UserStatusService } from './services/user_status.service';
 import { RoleService } from './services/role.service';
+import { PermissionService } from './services/permission.service';
+import { UserService } from './services/user.service';
+import { UserController } from './controllers/user.controller';
+import { UserRole } from './models/user_role.entity';
+import { UserRoleController } from './controllers/user_role.controller';
+import { UserRoleService } from './services/user_role.service';
 
 @Module({
   imports: [
@@ -25,21 +31,27 @@ import { RoleService } from './services/role.service';
         username: configService.get<string>('DB_USERNAME'),
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_DATABASE'),
-        entities: [UserStatus, Role, Permission, User],
+        entities: [UserStatus, Role, Permission, User, UserRole],
         synchronize: true,
         timezone: 'Z',
       }),
       inject: [ConfigService]
     }),
-    TypeOrmModule.forFeature([UserStatus, Role]),
+    TypeOrmModule.forFeature([UserStatus, Role, Permission, User, UserRole]),
   ],
   controllers: [
     UserStatusController,
     RoleController,
-    PermissionController],
+    PermissionController,
+    UserController,
+    UserRoleController
+  ],
   providers: [
     UserStatusService,
-    RoleService
+    RoleService,
+    PermissionService,
+    UserService,
+    UserRoleService
   ],
 })
 export class AppModule { }
