@@ -25,6 +25,9 @@ import { CategoryController } from './controllers/category.controller';
 import { ProductStatus } from './models/product_status.entity';
 import { ProductStatusService } from './services/product_status.service';
 import { ProductStatusController } from './controllers/product_status.controller';
+import { Product } from './models/product.entity';
+import { ProductService } from './services/product.service';
+import { ProductController } from './controllers/product.controller';
 
 @Module({
   imports: [
@@ -40,13 +43,13 @@ import { ProductStatusController } from './controllers/product_status.controller
         username: configService.get<string>('DB_USERNAME'),
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_DATABASE'),
-        entities: [UserStatus, Role, Permission, User, UserRole, RolePermission, Category, ProductStatus],
+        entities: [UserStatus, Role, Permission, User, UserRole, RolePermission, Category, ProductStatus, Product],
         synchronize: true,
         timezone: 'Z',
       }),
       inject: [ConfigService]
     }),
-    TypeOrmModule.forFeature([UserStatus, Role, Permission, User, UserRole, RolePermission, Category, ProductStatus]),
+    TypeOrmModule.forFeature([UserStatus, Role, Permission, User, UserRole, RolePermission, Category, ProductStatus, Product]),
   ],
   controllers: [
     UserStatusController,
@@ -57,6 +60,7 @@ import { ProductStatusController } from './controllers/product_status.controller
     RolePermissionController,
     CategoryController,
     ProductStatusController,
+    ProductController
   ],
   providers: [
     UserStatusService,
@@ -67,6 +71,7 @@ import { ProductStatusController } from './controllers/product_status.controller
     RolePermissionService,
     CategoryService,
     ProductStatusService,
+    ProductService,
   ],
 })
 export class AppModule { }
