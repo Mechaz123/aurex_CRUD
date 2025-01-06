@@ -33,7 +33,7 @@ export class UserStatusController {
             }
         } catch (error) {
             response.status(HttpStatus.INTERNAL_SERVER_ERROR);
-            response.json({ Data: [], Message: 'Internal server error.', Status: HttpStatus.INTERNAL_SERVER_ERROR, Success: false });
+            response.json({ Data: {}, Message: 'Internal server error.', Status: HttpStatus.INTERNAL_SERVER_ERROR, Success: false });
         }
         return response;
     }

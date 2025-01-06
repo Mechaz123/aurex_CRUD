@@ -1,20 +1,20 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { User } from "./user.entity";
 import { Role } from "./role.entity";
+import { Permission } from "./permission.entity";
 
 @Entity()
-export class UserRole {
+export class RolePermission {
 
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ManyToOne(() => User, (user) => user.userRoles, { eager: true, nullable: false })
-    @JoinColumn({ name: 'user_id' })
-    user: User;
-
-    @ManyToOne(() => Role, (role) => role.userRoles, { eager: true, nullable: false })
+    @ManyToOne(() => Role, (role) => role.rolePermissions, { eager: true, nullable: false })
     @JoinColumn({ name: 'role_id' })
     role: Role;
+
+    @ManyToOne(() => Permission, (permission) => permission.rolePermissions, { eager: true, nullable: false })
+    @JoinColumn({ name: 'permission_id' })
+    permission: Permission;
 
     @Column({
         nullable: false,

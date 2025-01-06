@@ -16,6 +16,15 @@ import { UserController } from './controllers/user.controller';
 import { UserRole } from './models/user_role.entity';
 import { UserRoleController } from './controllers/user_role.controller';
 import { UserRoleService } from './services/user_role.service';
+import { RolePermission } from './models/role_permission.entity';
+import { RolePermissionController } from './controllers/role_permission.controller';
+import { RolePermissionService } from './services/role_permission.service';
+import { Category } from './models/category.entity';
+import { CategoryService } from './services/category.service';
+import { CategoryController } from './controllers/category.controller';
+import { ProductStatus } from './models/product_status.entity';
+import { ProductStatusService } from './services/product_status.service';
+import { ProductStatusController } from './controllers/product_status.controller';
 
 @Module({
   imports: [
@@ -31,27 +40,33 @@ import { UserRoleService } from './services/user_role.service';
         username: configService.get<string>('DB_USERNAME'),
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_DATABASE'),
-        entities: [UserStatus, Role, Permission, User, UserRole],
+        entities: [UserStatus, Role, Permission, User, UserRole, RolePermission, Category, ProductStatus],
         synchronize: true,
         timezone: 'Z',
       }),
       inject: [ConfigService]
     }),
-    TypeOrmModule.forFeature([UserStatus, Role, Permission, User, UserRole]),
+    TypeOrmModule.forFeature([UserStatus, Role, Permission, User, UserRole, RolePermission, Category, ProductStatus]),
   ],
   controllers: [
     UserStatusController,
     RoleController,
     PermissionController,
     UserController,
-    UserRoleController
+    UserRoleController,
+    RolePermissionController,
+    CategoryController,
+    ProductStatusController,
   ],
   providers: [
     UserStatusService,
     RoleService,
     PermissionService,
     UserService,
-    UserRoleService
+    UserRoleService,
+    RolePermissionService,
+    CategoryService,
+    ProductStatusService,
   ],
 })
 export class AppModule { }

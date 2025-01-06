@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
+import { RolePermission } from "./role_permission.entity";
 
 @Entity()
 export class Permission {
@@ -12,7 +13,8 @@ export class Permission {
     name: string;
 
     @Column({
-        length: 255
+        length: 255,
+        nullable: true
     })
     description: string;
 
@@ -39,4 +41,7 @@ export class Permission {
 
     @UpdateDateColumn()
     updated_at: Date;
+
+    @OneToMany(() => RolePermission, (rolePermission) => rolePermission.permission)
+    rolePermissions: RolePermission[];
 }

@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
 import { Role } from 'src/models/role.entity';
 import { RoleService } from 'src/services/role.service';
-import { response, Response } from 'express';
+import { Response } from 'express';
 
 @Controller('role')
 export class RoleController {
@@ -33,7 +33,7 @@ export class RoleController {
             }
         } catch (error) {
             response.status(HttpStatus.INTERNAL_SERVER_ERROR);
-            response.json({ Data: [], Message: 'Internal server error.', Status: HttpStatus.INTERNAL_SERVER_ERROR, Success: false });
+            response.json({ Data: {}, Message: 'Internal server error.', Status: HttpStatus.INTERNAL_SERVER_ERROR, Success: false });
         }
         return response;
     }

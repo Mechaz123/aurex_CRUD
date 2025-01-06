@@ -12,10 +12,10 @@ export class UserRoleController {
         try {
             const userRoleData = await this.userRoleService.findAllUserRole();
             response.status(HttpStatus.OK);
-            response.json({ Data: userRoleData, Message: 'User-roles loaded successfully.', Status: HttpStatus.OK, Success: true});
+            response.json({ Data: userRoleData, Message: 'User-roles loaded successfully.', Status: HttpStatus.OK, Success: true });
         } catch (error) {
             response.status(HttpStatus.INTERNAL_SERVER_ERROR);
-            response.json({ Data: [], Message: 'Internal server error.', Status: HttpStatus.INTERNAL_SERVER_ERROR, Success: false});
+            response.json({ Data: [], Message: 'Internal server error.', Status: HttpStatus.INTERNAL_SERVER_ERROR, Success: false });
         }
         return response;
     }
@@ -26,14 +26,14 @@ export class UserRoleController {
             const userRoleData = await this.userRoleService.findOneUserRole(+id);
             if (userRoleData != null) {
                 response.status(HttpStatus.OK);
-                response.json({ Data: userRoleData, Message: 'User-role loaded successfully.', Status: HttpStatus.OK, Success: true});
+                response.json({ Data: userRoleData, Message: 'User-role loaded successfully.', Status: HttpStatus.OK, Success: true });
             } else {
                 response.status(HttpStatus.NOT_FOUND);
-                response.json({ Data: {}, Message: 'User-role not found.', Status: HttpStatus.NOT_FOUND, Success: false});
+                response.json({ Data: {}, Message: 'User-role not found.', Status: HttpStatus.NOT_FOUND, Success: false });
             }
         } catch (error) {
             response.status(HttpStatus.INTERNAL_SERVER_ERROR);
-            response.json({ Data: [], Message: 'Internal server error.', Status: HttpStatus.INTERNAL_SERVER_ERROR, Success: false});
+            response.json({ Data: {}, Message: 'Internal server error.', Status: HttpStatus.INTERNAL_SERVER_ERROR, Success: false });
         }
         return response;
     }
