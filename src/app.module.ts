@@ -28,6 +28,12 @@ import { ProductStatusController } from './controllers/product_status.controller
 import { Product } from './models/product.entity';
 import { ProductService } from './services/product.service';
 import { ProductController } from './controllers/product.controller';
+import { TransactionStatus } from './models/transaction_status.entity';
+import { TransactionStatusService } from './services/transaction_status.service';
+import { TransactionStatusController } from './controllers/transaction_status.controller';
+import { Transaction } from './models/transaction.entity';
+import { TransactionService } from './services/transaction.service';
+import { TransactionController } from './controllers/transaction.controller';
 
 @Module({
   imports: [
@@ -43,13 +49,13 @@ import { ProductController } from './controllers/product.controller';
         username: configService.get<string>('DB_USERNAME'),
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_DATABASE'),
-        entities: [UserStatus, Role, Permission, User, UserRole, RolePermission, Category, ProductStatus, Product],
+        entities: [UserStatus, Role, Permission, User, UserRole, RolePermission, Category, ProductStatus, Product, TransactionStatus, Transaction],
         synchronize: true,
         timezone: 'Z',
       }),
       inject: [ConfigService]
     }),
-    TypeOrmModule.forFeature([UserStatus, Role, Permission, User, UserRole, RolePermission, Category, ProductStatus, Product]),
+    TypeOrmModule.forFeature([UserStatus, Role, Permission, User, UserRole, RolePermission, Category, ProductStatus, Product, TransactionStatus, Transaction]),
   ],
   controllers: [
     UserStatusController,
@@ -60,7 +66,9 @@ import { ProductController } from './controllers/product.controller';
     RolePermissionController,
     CategoryController,
     ProductStatusController,
-    ProductController
+    ProductController,
+    TransactionStatusController,
+    TransactionController
   ],
   providers: [
     UserStatusService,
@@ -72,6 +80,8 @@ import { ProductController } from './controllers/product.controller';
     CategoryService,
     ProductStatusService,
     ProductService,
+    TransactionStatusService,
+    TransactionService,
   ],
 })
 export class AppModule { }

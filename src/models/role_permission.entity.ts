@@ -8,14 +8,6 @@ export class RolePermission {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ManyToOne(() => Role, (role) => role.rolePermissions, { eager: true, nullable: false })
-    @JoinColumn({ name: 'role_id' })
-    role: Role;
-
-    @ManyToOne(() => Permission, (permission) => permission.rolePermissions, { eager: true, nullable: false })
-    @JoinColumn({ name: 'permission_id' })
-    permission: Permission;
-
     @Column({
         nullable: false,
         default: true
@@ -27,4 +19,12 @@ export class RolePermission {
 
     @UpdateDateColumn()
     updated_at: Date;
+
+    @ManyToOne(() => Role, (role) => role.rolePermissions, { eager: true, nullable: false })
+    @JoinColumn({ name: 'role_id' })
+    role: Role;
+
+    @ManyToOne(() => Permission, (permission) => permission.rolePermissions, { eager: true, nullable: false })
+    @JoinColumn({ name: 'permission_id' })
+    permission: Permission;
 }

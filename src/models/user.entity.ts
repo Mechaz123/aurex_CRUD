@@ -1,8 +1,9 @@
 import { UserStatus } from "./user_status.entity"
-import { BeforeInsert, BeforeUpdate, Column, CreateDateColumn, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
+import { BeforeInsert, BeforeUpdate, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
 import * as bcrypt from "bcrypt";
 import { UserRole } from "./user_role.entity";
 import { Product } from "./product.entity";
+import { Transaction } from "./transaction.entity";
 
 @Entity()
 export class User {
@@ -71,8 +72,8 @@ export class User {
     @UpdateDateColumn()
     updated_at: Date;
 
-    @OneToOne(() => UserStatus, { eager: true, cascade: true, nullable: false })
-    @JoinColumn({ name: "user_status_id" })
+    @ManyToOne(() => UserStatus, { eager: true, nullable: false})
+    @JoinColumn({ name: "user_status_id"})
     user_status: UserStatus;
 
     @OneToMany(() => UserRole, (userRole) => userRole.user)
@@ -80,6 +81,12 @@ export class User {
 
     @OneToMany(() => Product, (product) => product.owner)
     userProducts: Product[];
+
+    @OneToMany(() => Transaction, (transaction) => transaction.sender)
+    userSenders: Transaction[];
+
+    @OneToMany(() => Transaction, (transaction) => transaction.receiver)
+    userReceivers: Transaction[];
 
     @BeforeInsert()
     @BeforeUpdate()

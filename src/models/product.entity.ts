@@ -53,7 +53,7 @@ export class Product {
     @JoinColumn({ name: 'category_id'})
     category: Category;
 
-    @OneToOne(() => ProductStatus, { eager: true, cascade: true, nullable: false })
+    @ManyToOne(() => ProductStatus, { eager: true, nullable: false })
     @JoinColumn({ name: 'product_status_id'})
     product_status: ProductStatus;
 }

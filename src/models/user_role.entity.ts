@@ -8,14 +8,6 @@ export class UserRole {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ManyToOne(() => User, (user) => user.userRoles, { eager: true, nullable: false })
-    @JoinColumn({ name: 'user_id' })
-    user: User;
-
-    @ManyToOne(() => Role, (role) => role.userRoles, { eager: true, nullable: false })
-    @JoinColumn({ name: 'role_id' })
-    role: Role;
-
     @Column({
         nullable: false,
         default: true
@@ -27,4 +19,12 @@ export class UserRole {
 
     @UpdateDateColumn()
     updated_at: Date;
+
+    @ManyToOne(() => User, (user) => user.userRoles, { eager: true, nullable: false })
+    @JoinColumn({ name: 'user_id' })
+    user: User;
+
+    @ManyToOne(() => Role, (role) => role.userRoles, { eager: true, nullable: false })
+    @JoinColumn({ name: 'role_id' })
+    role: Role;
 }

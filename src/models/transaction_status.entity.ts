@@ -1,8 +1,8 @@
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
-import { User } from "./user.entity"
+import { Column, CreateDateColumn, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Transaction } from "./transaction.entity";
 
 @Entity()
-export class UserStatus {
+export class TransactionStatus {
 
     @PrimaryGeneratedColumn()
     id: number;
@@ -31,6 +31,6 @@ export class UserStatus {
     @UpdateDateColumn()
     updated_at: Date;
 
-    @OneToMany(() => User, (user) => user.user_status)
-    user: User;
+    @OneToMany(() => Transaction, (transaction) => transaction.transaction_status)
+    transaction: Transaction;
 }
