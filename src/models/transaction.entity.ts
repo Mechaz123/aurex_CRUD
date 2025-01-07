@@ -1,6 +1,7 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { User } from "./user.entity";
 import { TransactionStatus } from "./transaction_status.entity";
+import { TransactionDetail } from "./transaction_detail.entity";
 
 @Entity()
 export class Transaction {
@@ -13,12 +14,6 @@ export class Transaction {
         nullable: false
     })
     transaction_type: string;
-
-    @Column({
-        nullable: false,
-        default: true
-    })
-    active: boolean;
 
     @CreateDateColumn()
     create_at: Date;
@@ -34,7 +29,10 @@ export class Transaction {
     @JoinColumn({ name: 'receiver_id'})
     receiver: User;
 
-    @ManyToOne(() => TransactionStatus, {eager: true, nullable: false })
+    @ManyToOne(() => TransactionStatus, (transactionStatus) => transactionStatus.transactions, {eager: true, nullable: false })
     @JoinColumn({ name: "transaction_status_id"})
     transaction_status: TransactionStatus;
+
+    @OneToMany(() => TransactionDetail, (transactionDetail) => transactionDetail.transaction)
+    transactionDetails: TransactionDetail[];
 }

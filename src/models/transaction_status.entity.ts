@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Transaction } from "./transaction.entity";
 
 @Entity()
@@ -32,5 +32,5 @@ export class TransactionStatus {
     updated_at: Date;
 
     @OneToMany(() => Transaction, (transaction) => transaction.transaction_status)
-    transaction: Transaction;
+    transactions: Transaction[];
 }

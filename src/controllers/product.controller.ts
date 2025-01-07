@@ -69,22 +69,4 @@ export class ProductController {
         }
         return response;
     }
-
-    @Delete("/:id")
-    async deleteProduct(@Res() response: Response, @Param('id') id: string) {
-        try {
-            const productData = await this.productService.removeProduct(+id);
-            if (productData != null) {
-                response.status(HttpStatus.OK);
-                response.json({ Data: productData, Message: 'Product was inactivated.', Status: HttpStatus.OK, Success: true });
-            } else {
-                response.status(HttpStatus.NOT_FOUND);
-                response.json({ Data: {}, Message: 'Product not exist.', Status: HttpStatus.NOT_FOUND, Success: false });
-            }
-        } catch (error) {
-            response.status(HttpStatus.INTERNAL_SERVER_ERROR);
-            response.json({ Data: {}, Message: 'Internal server error.', Status: HttpStatus.INTERNAL_SERVER_ERROR, Success: false });
-        }
-        return response;
-    }
 }

@@ -34,6 +34,9 @@ import { TransactionStatusController } from './controllers/transaction_status.co
 import { Transaction } from './models/transaction.entity';
 import { TransactionService } from './services/transaction.service';
 import { TransactionController } from './controllers/transaction.controller';
+import { TransactionDetail } from './models/transaction_detail.entity';
+import { TransactionDetailController } from './controllers/transaction_detail.controller';
+import { TransactionDetailService } from './services/transaction_detail.service';
 
 @Module({
   imports: [
@@ -49,13 +52,13 @@ import { TransactionController } from './controllers/transaction.controller';
         username: configService.get<string>('DB_USERNAME'),
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_DATABASE'),
-        entities: [UserStatus, Role, Permission, User, UserRole, RolePermission, Category, ProductStatus, Product, TransactionStatus, Transaction],
+        entities: [UserStatus, Role, Permission, User, UserRole, RolePermission, Category, ProductStatus, Product, TransactionStatus, Transaction, TransactionDetail],
         synchronize: true,
         timezone: 'Z',
       }),
       inject: [ConfigService]
     }),
-    TypeOrmModule.forFeature([UserStatus, Role, Permission, User, UserRole, RolePermission, Category, ProductStatus, Product, TransactionStatus, Transaction]),
+    TypeOrmModule.forFeature([UserStatus, Role, Permission, User, UserRole, RolePermission, Category, ProductStatus, Product, TransactionStatus, Transaction, TransactionDetail]),
   ],
   controllers: [
     UserStatusController,
@@ -68,7 +71,8 @@ import { TransactionController } from './controllers/transaction.controller';
     ProductStatusController,
     ProductController,
     TransactionStatusController,
-    TransactionController
+    TransactionController,
+    TransactionDetailController,
   ],
   providers: [
     UserStatusService,
@@ -82,6 +86,7 @@ import { TransactionController } from './controllers/transaction.controller';
     ProductService,
     TransactionStatusService,
     TransactionService,
+    TransactionDetailService
   ],
 })
 export class AppModule { }

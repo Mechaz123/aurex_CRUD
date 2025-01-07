@@ -69,22 +69,4 @@ export class TransactionController {
         }
         return response;
     }
-
-    @Delete("/:id")
-    async deleteTransaction(@Res() response: Response, @Param('id') id: string) {
-        try {
-            const transactionData = await this.transactionService.removeTransaction(+id);
-            if (transactionData != null) {
-                response.status(HttpStatus.OK);
-                response.json({ Data: transactionData, Message: 'Transaction was inactivated.', Status: HttpStatus.OK, Success: true });
-            } else {
-                response.status(HttpStatus.NOT_FOUND);
-                response.json({ Data: {}, Message: 'Transaction not exist.', Status: HttpStatus.NOT_FOUND, Success: false });
-            }
-        } catch (error) {
-            response.status(HttpStatus.INTERNAL_SERVER_ERROR);
-            response.json({ Data: {}, Message: 'Internal server error.', Status: HttpStatus.INTERNAL_SERVER_ERROR, Success: false });
-        }
-        return response;
-    }
 }

@@ -1,7 +1,8 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { User } from "./user.entity";
 import { Category } from "./category.entity";
 import { ProductStatus } from "./product_status.entity";
+import { TransactionDetail } from "./transaction_detail.entity";
 
 @Entity()
 export class Product {
@@ -21,7 +22,11 @@ export class Product {
     })
     description: string;
 
-    @Column({ type: 'decimal', precision: 10, scale: 2 })
+    @Column({
+        type: 'decimal',
+        precision: 10,
+        scale: 2 
+    })
     price: number;
 
     @Column({ nullable: false, default: 0 })
@@ -32,12 +37,6 @@ export class Product {
         nullable: true,
     })
     image_url: string;
-
-    @Column({
-        nullable: false,
-        default: true
-    })
-    active: boolean;
 
     @CreateDateColumn()
     created_at: Date;
@@ -56,4 +55,7 @@ export class Product {
     @ManyToOne(() => ProductStatus, { eager: true, nullable: false })
     @JoinColumn({ name: 'product_status_id'})
     product_status: ProductStatus;
+
+    @OneToMany(() => TransactionDetail, (transactionDetail) => transactionDetail.product)
+    productDetails: TransactionDetail[];
 }

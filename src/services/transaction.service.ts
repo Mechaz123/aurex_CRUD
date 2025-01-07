@@ -27,13 +27,4 @@ export class TransactionService {
         await this.transactionRepository.update(id, Transaction);
         return await this.findOneTransaction(id);
     }
-
-    async removeTransaction(id: number) {
-        let TransactionData = await this.transactionRepository.findOneBy({ id });
-        TransactionData.active = false;
-        const nowDate = new Date();
-        nowDate.setHours(nowDate.getHours() - 5);
-        TransactionData.updated_at = new Date(nowDate);
-        return await this.updateTransaction(id, TransactionData);
-    }
 }

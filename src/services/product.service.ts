@@ -27,13 +27,4 @@ export class ProductService {
         await this.productRepository.update(id, Product);
         return await this.findOneProduct(id);
     }
-
-    async removeProduct(id: number) {
-        let ProductData = await this.productRepository.findOneBy({ id });
-        ProductData.active = false;
-        const nowDate = new Date();
-        nowDate.setHours(nowDate.getHours() - 5);
-        ProductData.updated_at = new Date(nowDate);
-        return await this.updateProduct(id, ProductData);
-    }
 }
