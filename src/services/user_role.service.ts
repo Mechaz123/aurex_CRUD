@@ -29,11 +29,11 @@ export class UserRoleService {
     }
 
     async removeUserRole(id: number) {
-         let UserRoleData = await this.userRoleRepository.findOneBy({ id });
-         UserRoleData.active = false;
-         const nowDate = new Date();
-         nowDate.setHours(nowDate.getHours() - 5);
-         UserRoleData.updated_at = new Date(nowDate);
-         return await this.updateUserRole(id, UserRoleData);
+        let UserRoleData = await this.userRoleRepository.findOneBy({ id });
+        UserRoleData.active = false;
+        const nowDate = new Date();
+        nowDate.setHours(nowDate.getHours() - 5);
+        UserRoleData.updated_at = new Date(nowDate);
+        return await this.updateUserRole(id, UserRoleData);
     }
 }

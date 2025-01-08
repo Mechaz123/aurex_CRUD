@@ -30,7 +30,4 @@ export class UserStatus {
 
     @UpdateDateColumn()
     updated_at: Date;
-
-    @OneToMany(() => User, (user) => user.user_status)
-    user: User;
 }

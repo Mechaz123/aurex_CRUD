@@ -11,11 +11,11 @@ export class CategoryService {
     ) { }
 
     async findAllCategory(): Promise<Category[]> {
-        return await this.categoryRepository.find({ relations: ['parentCategory']});
+        return await this.categoryRepository.find({ relations: ['parentCategory'] });
     }
 
     async findOneCategory(id: number): Promise<Category> {
-        return await this.categoryRepository.findOne({ where: { id }, relations: ['parentCategory']});
+        return await this.categoryRepository.findOne({ where: { id }, relations: ['parentCategory'] });
     }
 
     async createCategory(Category: Partial<Category>): Promise<Category> {

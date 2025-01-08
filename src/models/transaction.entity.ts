@@ -21,16 +21,16 @@ export class Transaction {
     @UpdateDateColumn()
     updated_at: Date;
 
-    @ManyToOne(() => User, (user) => user.userSenders, {eager: true, nullable: false })
-    @JoinColumn({ name: 'sender_id'})
+    @ManyToOne(() => User, (user) => user.userSenders, { eager: true, nullable: false })
+    @JoinColumn({ name: 'sender_id' })
     sender: User;
 
-    @ManyToOne(() => User, (user) => user.userReceivers, {eager: true, nullable: false })
-    @JoinColumn({ name: 'receiver_id'})
+    @ManyToOne(() => User, (user) => user.userReceivers, { eager: true, nullable: false })
+    @JoinColumn({ name: 'receiver_id' })
     receiver: User;
 
-    @ManyToOne(() => TransactionStatus, (transactionStatus) => transactionStatus.transactions, {eager: true, nullable: false })
-    @JoinColumn({ name: "transaction_status_id"})
+    @ManyToOne(() => TransactionStatus, { eager: true, nullable: false })
+    @JoinColumn({ name: "transaction_status_id" })
     transaction_status: TransactionStatus;
 
     @OneToMany(() => TransactionDetail, (transactionDetail) => transactionDetail.transaction)

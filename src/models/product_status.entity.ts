@@ -30,7 +30,4 @@ export class ProductStatus {
 
     @UpdateDateColumn()
     updated_at: Date;
-
-    @OneToMany(() => Product, (product) => product.product_status)
-    product: Product;
 }

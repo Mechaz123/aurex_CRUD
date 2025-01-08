@@ -5,7 +5,7 @@ import { RolePermissionService } from 'src/services/role_permission.service';
 
 @Controller('role_permission')
 export class RolePermissionController {
-    constructor(private readonly rolePermissionService: RolePermissionService) {}
+    constructor(private readonly rolePermissionService: RolePermissionService) { }
 
     @Get("/")
     async getAllRolePermission(@Res() response: Response) {

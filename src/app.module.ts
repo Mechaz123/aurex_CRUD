@@ -37,6 +37,24 @@ import { TransactionController } from './controllers/transaction.controller';
 import { TransactionDetail } from './models/transaction_detail.entity';
 import { TransactionDetailController } from './controllers/transaction_detail.controller';
 import { TransactionDetailService } from './services/transaction_detail.service';
+import { AuctionStatus } from './models/auction_status.entity';
+import { AuctionStatusService } from './services/auction_status.service';
+import { AuctionStatusController } from './controllers/auction_status.controller';
+import { Auction } from './models/auction.entity';
+import { AuctionController } from './controllers/auction.controller';
+import { AuctionService } from './services/auction.service';
+import { Bid } from './models/bid.entity';
+import { BidController } from './controllers/bid.controller';
+import { BidService } from './services/bid.service';
+import { OrderStatus } from './models/order_status.entity';
+import { OrderStatusController } from './controllers/order_status.controller';
+import { OrderStatusService } from './services/order_status.service';
+import { Order } from './models/order.entity';
+import { OrderController } from './controllers/order.controller';
+import { OrderService } from './services/order.service';
+import { OrderDetail } from './models/order_detail.entity';
+import { OrderDetailController } from './controllers/order_detail.controller';
+import { OrderDetailService } from './services/order_detail.service';
 
 @Module({
   imports: [
@@ -52,13 +70,51 @@ import { TransactionDetailService } from './services/transaction_detail.service'
         username: configService.get<string>('DB_USERNAME'),
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_DATABASE'),
-        entities: [UserStatus, Role, Permission, User, UserRole, RolePermission, Category, ProductStatus, Product, TransactionStatus, Transaction, TransactionDetail],
+        entities: [
+          UserStatus,
+          Role,
+          Permission,
+          User,
+          UserRole,
+          RolePermission,
+          Category,
+          ProductStatus,
+          Product,
+          TransactionStatus,
+          Transaction,
+          TransactionDetail,
+          AuctionStatus,
+          Auction,
+          Bid,
+          OrderStatus,
+          Order,
+          OrderDetail
+        ],
         synchronize: true,
         timezone: 'Z',
       }),
       inject: [ConfigService]
     }),
-    TypeOrmModule.forFeature([UserStatus, Role, Permission, User, UserRole, RolePermission, Category, ProductStatus, Product, TransactionStatus, Transaction, TransactionDetail]),
+    TypeOrmModule.forFeature([
+      UserStatus,
+      Role,
+      Permission,
+      User,
+      UserRole,
+      RolePermission,
+      Category,
+      ProductStatus,
+      Product,
+      TransactionStatus,
+      Transaction,
+      TransactionDetail,
+      AuctionStatus,
+      Auction,
+      Bid,
+      OrderStatus,
+      Order,
+      OrderDetail
+    ]),
   ],
   controllers: [
     UserStatusController,
@@ -73,6 +129,12 @@ import { TransactionDetailService } from './services/transaction_detail.service'
     TransactionStatusController,
     TransactionController,
     TransactionDetailController,
+    AuctionStatusController,
+    AuctionController,
+    BidController,
+    OrderStatusController,
+    OrderController,
+    OrderDetailController
   ],
   providers: [
     UserStatusService,
@@ -86,7 +148,13 @@ import { TransactionDetailService } from './services/transaction_detail.service'
     ProductService,
     TransactionStatusService,
     TransactionService,
-    TransactionDetailService
+    TransactionDetailService,
+    AuctionStatusService,
+    AuctionService,
+    BidService,
+    OrderStatusService,
+    OrderService,
+    OrderDetailService
   ],
 })
 export class AppModule { }

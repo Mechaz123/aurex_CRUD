@@ -1,8 +1,7 @@
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { Transaction } from "./transaction.entity";
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
-export class TransactionStatus {
+export class OrderStatus {
 
     @PrimaryGeneratedColumn()
     id: number;

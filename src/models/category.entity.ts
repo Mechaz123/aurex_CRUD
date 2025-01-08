@@ -18,7 +18,7 @@ export class Category {
         nullable: true
     })
     description: string;
-    
+
     @Column({
         nullable: false,
         default: true

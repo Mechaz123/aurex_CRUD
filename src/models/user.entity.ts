@@ -4,6 +4,8 @@ import * as bcrypt from "bcrypt";
 import { UserRole } from "./user_role.entity";
 import { Product } from "./product.entity";
 import { Transaction } from "./transaction.entity";
+import { Bid } from "./bid.entity";
+import { Order } from "./order.entity";
 
 @Entity()
 export class User {
@@ -72,8 +74,8 @@ export class User {
     @UpdateDateColumn()
     updated_at: Date;
 
-    @ManyToOne(() => UserStatus, { eager: true, nullable: false})
-    @JoinColumn({ name: "user_status_id"})
+    @ManyToOne(() => UserStatus, { eager: true, nullable: false })
+    @JoinColumn({ name: "user_status_id" })
     user_status: UserStatus;
 
     @OneToMany(() => UserRole, (userRole) => userRole.user)
@@ -87,6 +89,12 @@ export class User {
 
     @OneToMany(() => Transaction, (transaction) => transaction.receiver)
     userReceivers: Transaction[];
+
+    @OneToMany(() => Bid, (bid) => bid.user)
+    userBids: Bid[];
+
+    @OneToMany(() => Order, (order) => order.user)
+    userOrders: Order[];
 
     @BeforeInsert()
     @BeforeUpdate()
