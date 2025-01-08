@@ -73,8 +73,9 @@ export class AuctionStatusController {
     @Delete("/:id")
     async deleteAuctionStatus(@Res() response: Response, @Param('id') id: string) {
         try {
-            const auctionStatusData = await this.auctionStatusService.removeAuctionStatus(+id);
-            if (auctionStatusData != null) {
+            const auctionStatusCreated = await this.auctionStatusService.findOneAuctionStatus(+id);
+            if (auctionStatusCreated != null) {
+                const auctionStatusData = await this.auctionStatusService.removeAuctionStatus(+id);
                 response.status(HttpStatus.OK);
                 response.json({ Data: auctionStatusData, Message: 'Auction status was inactivated.', Status: HttpStatus.OK, Success: true });
             } else {

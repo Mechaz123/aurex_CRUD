@@ -73,8 +73,9 @@ export class UserStatusController {
     @Delete("/:id")
     async deleteUserStatus(@Res() response: Response, @Param('id') id: string) {
         try {
-            const userStatusData = await this.userStatusService.removeUserStatus(+id);
-            if (userStatusData != null) {
+            const userStatusCreated = await this.userStatusService.findOneUserStatus(+id);
+            if (userStatusCreated != null) {
+                const userStatusData = await this.userStatusService.removeUserStatus(+id);
                 response.status(HttpStatus.OK);
                 response.json({ Data: userStatusData, Message: 'User status was inactivated.', Status: HttpStatus.OK, Success: true });
             } else {

@@ -73,8 +73,9 @@ export class CategoryController {
     @Delete("/:id")
     async deleteCategory(@Res() response: Response, @Param('id') id: string) {
         try {
-            const categoryData = await this.categoryService.removeCategory(+id);
-            if (categoryData != null) {
+            const categoryCreated = await this.categoryService.findOneCategory(+id);
+            if (categoryCreated != null) {
+                const categoryData = await this.categoryService.removeCategory(+id);
                 response.status(HttpStatus.OK);
                 response.json({ Data: categoryData, Message: 'Category was inactivated.', Status: HttpStatus.OK, Success: true });
             } else {

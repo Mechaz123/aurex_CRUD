@@ -73,8 +73,9 @@ export class OrderDetailController {
     @Delete("/:id")
     async deleteOrderDetail(@Res() response: Response, @Param('id') id: string) {
         try {
-            const orderDetailData = await this.orderDetailService.removeOrderDetail(+id);
-            if (orderDetailData != null) {
+            const orderDetailCreated = await this.orderDetailService.findOneOrderDetail(+id);
+            if (orderDetailCreated != null) {
+                const orderDetailData = await this.orderDetailService.removeOrderDetail(+id);
                 response.status(HttpStatus.OK);
                 response.json({ Data: orderDetailData, Message: 'Order detail was inactivated.', Status: HttpStatus.OK, Success: true });
             } else {

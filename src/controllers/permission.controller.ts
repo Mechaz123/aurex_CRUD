@@ -73,8 +73,9 @@ export class PermissionController {
     @Delete("/:id")
     async deletePermission(@Res() response: Response, @Param('id') id: string) {
         try {
-            const permissionData = await this.permissionService.removePermission(+id);
-            if (permissionData != null) {
+            const permissionCreated = await this.permissionService.findOnePermission(+id);
+            if (permissionCreated != null) {
+                const permissionData = await this.permissionService.removePermission(+id);
                 response.status(HttpStatus.OK);
                 response.json({ Data: permissionData, Message: 'Permission was inactivated.', Status: HttpStatus.OK, Success: true });
             } else {

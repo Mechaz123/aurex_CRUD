@@ -73,8 +73,9 @@ export class RoleController {
     @Delete("/:id")
     async deleteRole(@Res() response: Response, @Param('id') id: string) {
         try {
-            const roleData = await this.roleService.removeRole(+id);
-            if (roleData != null) {
+            const roleCreated = await this.roleService.findOneRole(+id);
+            if (roleCreated != null) {
+                const roleData = await this.roleService.removeRole(+id);
                 response.status(HttpStatus.OK);
                 response.json({ Data: roleData, Message: 'Role was inactivated.', Status: HttpStatus.OK, Success: true });
             } else {

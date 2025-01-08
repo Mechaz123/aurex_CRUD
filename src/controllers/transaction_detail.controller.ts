@@ -73,8 +73,9 @@ export class TransactionDetailController {
     @Delete("/:id")
     async deleteTransactionDetail(@Res() response: Response, @Param('id') id: string) {
         try {
-            const transactionDetailData = await this.transactionDetailService.removeTransactionDetail(+id);
-            if (transactionDetailData != null) {
+            const transactionDetailCreated = await this.transactionDetailService.findOneTransactionDetail(+id);
+            if (transactionDetailCreated != null) {
+                const transactionDetailData = await this.transactionDetailService.removeTransactionDetail(+id);
                 response.status(HttpStatus.OK);
                 response.json({ Data: transactionDetailData, Message: 'Transaction detail was inactivated.', Status: HttpStatus.OK, Success: true });
             } else {

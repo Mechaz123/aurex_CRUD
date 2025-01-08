@@ -73,8 +73,9 @@ export class ProductStatusController {
     @Delete("/:id")
     async deleteProductStatus(@Res() response: Response, @Param('id') id: string) {
         try {
-            const productStatusData = await this.productStatusService.removeProductStatus(+id);
-            if (productStatusData != null) {
+            const productStatusCreated = await this.productStatusService.findOneProductStatus(+id);
+            if (productStatusCreated != null) {
+                const productStatusData = await this.productStatusService.removeProductStatus(+id);
                 response.status(HttpStatus.OK);
                 response.json({ Data: productStatusData, Message: 'Product status was inactivated.', Status: HttpStatus.OK, Success: true });
             } else {

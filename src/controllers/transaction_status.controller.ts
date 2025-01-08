@@ -73,8 +73,9 @@ export class TransactionStatusController {
     @Delete("/:id")
     async deleteTransactionStatus(@Res() response: Response, @Param('id') id: string) {
         try {
-            const transactionStatusData = await this.transactionStatusService.removeTransactionStatus(+id);
-            if (transactionStatusData != null) {
+            const transactionStatusCreated = await this.transactionStatusService.findOneTransactionStatus(+id);
+            if (transactionStatusCreated != null) {
+                const transactionStatusData = await this.transactionStatusService.removeTransactionStatus(+id);
                 response.status(HttpStatus.OK);
                 response.json({ Data: transactionStatusData, Message: 'Transaction status was inactivated.', Status: HttpStatus.OK, Success: true });
             } else {

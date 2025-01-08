@@ -73,8 +73,9 @@ export class OrderStatusController {
     @Delete("/:id")
     async deleteOrderStatus(@Res() response: Response, @Param('id') id: string) {
         try {
-            const orderStatusData = await this.orderStatusService.removeOrderStatus(+id);
-            if (orderStatusData != null) {
+            const orderStatusCreated = await this.orderStatusService.findOneOrderStatus(+id)
+            if (orderStatusCreated != null) {
+                const orderStatusData = await this.orderStatusService.removeOrderStatus(+id);
                 response.status(HttpStatus.OK);
                 response.json({ Data: orderStatusData, Message: 'Order status was inactivated.', Status: HttpStatus.OK, Success: true });
             } else {

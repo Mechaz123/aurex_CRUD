@@ -37,7 +37,7 @@ $ npm run start:prod
 ```
 ## Data model
 
-<img src="database/FINAL_MODEL_DB.png" alt="DATABASE MODEL" width="300">
+<img src="database/FINAL_MODEL_DB.png" alt="DATABASE MODEL">
 
 ## Deployment
 

@@ -73,8 +73,9 @@ export class RolePermissionController {
     @Delete("/:id")
     async deleteRolePermission(@Res() response: Response, @Param('id') id: string) {
         try {
-            const rolePermissionData = await this.rolePermissionService.removeRolePermission(+id);
-            if (rolePermissionData != null) {
+            const rolePermissionCreated = await this.rolePermissionService.findOneRolePermission(+id);
+            if (rolePermissionCreated != null) {
+                const rolePermissionData = await this.rolePermissionService.removeRolePermission(+id);
                 response.status(HttpStatus.OK);
                 response.json({ Data: rolePermissionData, Message: 'Role-permission was inactivated.', Status: HttpStatus.OK, Success: true });
             } else {

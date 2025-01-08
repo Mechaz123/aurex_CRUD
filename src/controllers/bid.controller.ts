@@ -73,8 +73,9 @@ export class BidController {
     @Delete("/:id")
     async deleteBid(@Res() response: Response, @Param('id') id: string) {
         try {
-            const bidData = await this.bidService.removeBid(+id);
-            if (bidData != null) {
+            const bidCreated = await this.bidService.findOneBid(+id);
+            if (bidCreated != null) {
+                const bidData = await this.bidService.removeBid(+id);
                 response.status(HttpStatus.OK);
                 response.json({ Data: bidData, Message: 'Bid was inactivated.', Status: HttpStatus.OK, Success: true });
             } else {
