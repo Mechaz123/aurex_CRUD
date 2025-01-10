@@ -36,7 +36,7 @@ export class Product {
         nullable: false,
         default: 0
     })
-    stock: number
+    stock: number;
 
     @Column({
         length: 255,

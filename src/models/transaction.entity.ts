@@ -16,7 +16,7 @@ export class Transaction {
     transaction_type: string;
 
     @CreateDateColumn()
-    create_at: Date;
+    created_at: Date;
 
     @UpdateDateColumn()
     updated_at: Date;
