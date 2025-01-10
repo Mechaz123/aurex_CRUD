@@ -14,7 +14,7 @@
 ### Environment variables
 ```bash
 # API parameters
-HTTP_PORT=[API exposure port]
+AUREX_CRUD_HTTP_PORT=[API exposure port]
 # Parameters of database
 DB_HOST=[URL, Domain or DB EndPoint]
 DB_PORT=[DB Port]
