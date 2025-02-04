@@ -1,12 +1,14 @@
-import { Body, Controller, Get, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Param, Post, Put, Res, UseGuards } from '@nestjs/common';
 import { AuctionService } from 'src/services/auction.service';
 import { Response } from 'express';
 import { Auction } from 'src/models/auction.entity';
+import { AuthenticationGuard } from 'src/guards/authentication.guard';
 
 @Controller('auction')
 export class AuctionController {
     constructor(private readonly auctionService: AuctionService) { }
 
+    @UseGuards(AuthenticationGuard)
     @Get("/")
     async getAllAuction(@Res() response: Response) {
         try {
@@ -20,6 +22,7 @@ export class AuctionController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Get("/:id")
     async getOneAuction(@Res() response: Response, @Param('id') id: string) {
         try {
@@ -38,6 +41,7 @@ export class AuctionController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Post("/")
     async postAuction(@Res() response: Response, @Body() body: Partial<Auction>) {
         try {
@@ -51,6 +55,7 @@ export class AuctionController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Put("/:id")
     async putAuction(@Res() response: Response, @Param('id') id: string, @Body() body: Partial<Auction>) {
         try {

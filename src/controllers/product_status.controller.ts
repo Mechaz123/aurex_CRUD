@@ -1,12 +1,14 @@
-import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res, UseGuards } from '@nestjs/common';
 import { ProductStatusService } from 'src/services/product_status.service';
 import { Response } from 'express';
 import { ProductStatus } from 'src/models/product_status.entity';
+import { AuthenticationGuard } from 'src/guards/authentication.guard';
 
 @Controller('product_status')
 export class ProductStatusController {
     constructor(private readonly productStatusService: ProductStatusService) { }
 
+    @UseGuards(AuthenticationGuard)
     @Get("/")
     async getAllProductStatus(@Res() response: Response) {
         try {
@@ -20,6 +22,7 @@ export class ProductStatusController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Get("/:id")
     async getOneProductStatus(@Res() response: Response, @Param('id') id: string) {
         try {
@@ -38,6 +41,7 @@ export class ProductStatusController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Post("/")
     async postProductStatus(@Res() response: Response, @Body() body: Partial<ProductStatus>) {
         try {
@@ -51,6 +55,7 @@ export class ProductStatusController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Put("/:id")
     async putProductStatus(@Res() response: Response, @Param('id') id: string, @Body() body: Partial<ProductStatus>) {
         try {
@@ -70,6 +75,7 @@ export class ProductStatusController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Delete("/:id")
     async deleteProductStatus(@Res() response: Response, @Param('id') id: string) {
         try {

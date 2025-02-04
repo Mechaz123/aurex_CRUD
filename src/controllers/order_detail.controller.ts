@@ -1,12 +1,14 @@
-import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res, UseGuards } from '@nestjs/common';
 import { OrderDetailService } from 'src/services/order_detail.service';
 import { Response } from 'express';
 import { OrderDetail } from 'src/models/order_detail.entity';
+import { AuthenticationGuard } from 'src/guards/authentication.guard';
 
 @Controller('order_detail')
 export class OrderDetailController {
     constructor(private readonly orderDetailService: OrderDetailService) { }
 
+    @UseGuards(AuthenticationGuard)
     @Get("/")
     async getAllOrderDetail(@Res() response: Response) {
         try {
@@ -20,6 +22,7 @@ export class OrderDetailController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Get("/:id")
     async getOneOrderDetail(@Res() response: Response, @Param('id') id: string) {
         try {
@@ -38,6 +41,7 @@ export class OrderDetailController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Post("/")
     async postOrderDetail(@Res() response: Response, @Body() body: OrderDetail) {
         try {
@@ -51,6 +55,7 @@ export class OrderDetailController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Put("/:id")
     async putOrderDetail(@Res() response: Response, @Param('id') id: string, @Body() body: OrderDetail) {
         try {
@@ -70,6 +75,7 @@ export class OrderDetailController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Delete("/:id")
     async deleteOrderDetail(@Res() response: Response, @Param('id') id: string) {
         try {

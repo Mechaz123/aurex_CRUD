@@ -1,12 +1,14 @@
-import { Body, Controller, Get, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Param, Post, Put, Res, UseGuards } from '@nestjs/common';
 import { OrderService } from 'src/services/order.service';
 import { Response } from 'express';
 import { Order } from 'src/models/order.entity';
+import { AuthenticationGuard } from 'src/guards/authentication.guard';
 
 @Controller('order')
 export class OrderController {
     constructor(private readonly orderService: OrderService) { }
 
+    @UseGuards(AuthenticationGuard)
     @Get("/")
     async getAllOrder(@Res() response: Response) {
         try {
@@ -20,6 +22,7 @@ export class OrderController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Get("/:id")
     async getOneOrder(@Res() response: Response, @Param('id') id: string) {
         try {
@@ -38,6 +41,7 @@ export class OrderController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Post("/")
     async postOrder(@Res() response: Response, @Body() body: Partial<Order>) {
         try {
@@ -51,6 +55,7 @@ export class OrderController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Put("/:id")
     async putOrder(@Res() response: Response, @Param('id') id: string, @Body() body: Partial<Order>) {
         try {

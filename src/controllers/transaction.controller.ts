@@ -1,12 +1,14 @@
-import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res, UseGuards } from '@nestjs/common';
 import { TransactionService } from 'src/services/transaction.service';
 import { Response } from 'express';
 import { Transaction } from 'src/models/transaction.entity';
+import { AuthenticationGuard } from 'src/guards/authentication.guard';
 
 @Controller('transaction')
 export class TransactionController {
     constructor(private readonly transactionService: TransactionService) { }
 
+    @UseGuards(AuthenticationGuard)
     @Get("/")
     async getAllTransaction(@Res() response: Response) {
         try {
@@ -20,6 +22,7 @@ export class TransactionController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Get("/:id")
     async getOneTransaction(@Res() response: Response, @Param('id') id: string) {
         try {
@@ -38,6 +41,7 @@ export class TransactionController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Post("/")
     async postTransaction(@Res() response: Response, @Body() body: Transaction) {
         try {
@@ -51,6 +55,7 @@ export class TransactionController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Put("/:id")
     async putTransaction(@Res() response: Response, @Param('id') id: string, @Body() body: Transaction) {
         try {

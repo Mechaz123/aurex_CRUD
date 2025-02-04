@@ -1,12 +1,14 @@
-import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res, UseGuards } from '@nestjs/common';
 import { UserRoleService } from 'src/services/user_role.service';
 import { Response } from 'express';
 import { UserRole } from 'src/models/user_role.entity';
+import { AuthenticationGuard } from 'src/guards/authentication.guard';
 
 @Controller('user_role')
 export class UserRoleController {
     constructor(private readonly userRoleService: UserRoleService) { }
 
+    @UseGuards(AuthenticationGuard)
     @Get("/")
     async getAllUserRole(@Res() response: Response) {
         try {
@@ -20,6 +22,7 @@ export class UserRoleController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Get("/:id")
     async getOneUserRole(@Res() response: Response, @Param('id') id: string) {
         try {
@@ -38,6 +41,7 @@ export class UserRoleController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Post("/")
     async postUserRole(@Res() response: Response, @Body() body: Partial<UserRole>) {
         try {
@@ -51,6 +55,7 @@ export class UserRoleController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Put("/:id")
     async putUserRole(@Res() response: Response, @Param('id') id: string, @Body() body: Partial<UserRole>) {
         try {
@@ -70,6 +75,7 @@ export class UserRoleController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Delete("/:id")
     async deleteUserRole(@Res() response: Response, @Param('id') id: string) {
         try {

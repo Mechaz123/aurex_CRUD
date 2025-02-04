@@ -1,12 +1,14 @@
-import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res, UseGuards } from '@nestjs/common';
 import { Role } from 'src/models/role.entity';
 import { RoleService } from 'src/services/role.service';
 import { Response } from 'express';
+import { AuthenticationGuard } from 'src/guards/authentication.guard';
 
 @Controller('role')
 export class RoleController {
     constructor(private readonly roleService: RoleService) { }
 
+    @UseGuards(AuthenticationGuard)
     @Get("/")
     async getAllRole(@Res() response: Response) {
         try {
@@ -20,6 +22,7 @@ export class RoleController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Get("/:id")
     async getOneRole(@Res() response: Response, @Param('id') id: string) {
         try {
@@ -38,6 +41,7 @@ export class RoleController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Post("/")
     async postRole(@Res() response: Response, @Body() body: Role) {
         try {
@@ -51,6 +55,7 @@ export class RoleController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Put("/:id")
     async putRole(@Res() response: Response, @Param('id') id: string, @Body() body: Role) {
         try {
@@ -70,6 +75,7 @@ export class RoleController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Delete("/:id")
     async deleteRole(@Res() response: Response, @Param('id') id: string) {
         try {

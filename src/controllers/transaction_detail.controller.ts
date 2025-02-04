@@ -1,12 +1,14 @@
-import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res, UseGuards } from '@nestjs/common';
 import { TransactionDetailService } from 'src/services/transaction_detail.service';
 import { Response } from 'express';
 import { TransactionDetail } from 'src/models/transaction_detail.entity';
+import { AuthenticationGuard } from 'src/guards/authentication.guard';
 
 @Controller('transaction_detail')
 export class TransactionDetailController {
     constructor(private readonly transactionDetailService: TransactionDetailService) { }
 
+    @UseGuards(AuthenticationGuard)
     @Get("/")
     async getAllTransactionDetail(@Res() response: Response) {
         try {
@@ -20,6 +22,7 @@ export class TransactionDetailController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Get("/:id")
     async getOneTransactionDetail(@Res() response: Response, @Param('id') id: string) {
         try {
@@ -38,6 +41,7 @@ export class TransactionDetailController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Post("/")
     async postTransactionDetail(@Res() response: Response, @Body() body: TransactionDetail) {
         try {
@@ -51,6 +55,7 @@ export class TransactionDetailController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Put("/:id")
     async putTransactionDetail(@Res() response: Response, @Param('id') id: string, @Body() body: TransactionDetail) {
         try {
@@ -70,6 +75,7 @@ export class TransactionDetailController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Delete("/:id")
     async deleteTransactionDetail(@Res() response: Response, @Param('id') id: string) {
         try {

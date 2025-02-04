@@ -1,5 +1,6 @@
-import { Body, Controller, Get, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Param, Post, Put, Res, UseGuards } from '@nestjs/common';
 import { Response } from 'express';
+import { AuthenticationGuard } from 'src/guards/authentication.guard';
 import { User } from 'src/models/user.entity';
 import { UserService } from 'src/services/user.service';
 
@@ -7,6 +8,7 @@ import { UserService } from 'src/services/user.service';
 export class UserController {
     constructor(private readonly userService: UserService) { }
 
+    @UseGuards(AuthenticationGuard)
     @Get("/")
     async getAllUser(@Res() response: Response) {
         try {
@@ -20,6 +22,7 @@ export class UserController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Get("/:id")
     async getOneUser(@Res() response: Response, @Param('id') id: string) {
         try {
@@ -38,6 +41,7 @@ export class UserController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Post("/")
     async postUser(@Res() response: Response, @Body() body: Partial<User>) {
         try {
@@ -51,6 +55,7 @@ export class UserController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Put("/:id")
     async putUser(@Res() response: Response, @Param('id') id: string, @Body() body: Partial<User>) {
         try {

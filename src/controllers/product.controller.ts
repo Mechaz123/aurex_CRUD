@@ -1,12 +1,14 @@
-import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res, UseGuards } from '@nestjs/common';
 import { ProductService } from 'src/services/product.service';
 import { Response } from 'express';
 import { Product } from 'src/models/product.entity';
+import { AuthenticationGuard } from 'src/guards/authentication.guard';
 
 @Controller('product')
 export class ProductController {
     constructor(private readonly productService: ProductService) { }
 
+    @UseGuards(AuthenticationGuard)
     @Get("/")
     async getAllProduct(@Res() response: Response) {
         try {
@@ -20,6 +22,7 @@ export class ProductController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Get("/:id")
     async getOneProduct(@Res() response: Response, @Param('id') id: string) {
         try {
@@ -38,6 +41,7 @@ export class ProductController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Post("/")
     async postProduct(@Res() response: Response, @Body() body: Product) {
         try {
@@ -51,6 +55,7 @@ export class ProductController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Put("/:id")
     async putProduct(@Res() response: Response, @Param('id') id: string, @Body() body: Product) {
         try {

@@ -1,5 +1,6 @@
-import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res, UseGuards } from '@nestjs/common';
 import { Response } from 'express';
+import { AuthenticationGuard } from 'src/guards/authentication.guard';
 import { Category } from 'src/models/category.entity';
 import { CategoryService } from 'src/services/category.service';
 
@@ -7,6 +8,7 @@ import { CategoryService } from 'src/services/category.service';
 export class CategoryController {
     constructor(private readonly categoryService: CategoryService) { }
 
+    @UseGuards(AuthenticationGuard)
     @Get("/")
     async getAllCategory(@Res() response: Response) {
         try {
@@ -20,6 +22,7 @@ export class CategoryController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Get("/:id")
     async getOneCategory(@Res() response: Response, @Param('id') id: string) {
         try {
@@ -38,6 +41,7 @@ export class CategoryController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Post("/")
     async postCategory(@Res() response: Response, @Body() body: Category) {
         try {
@@ -51,6 +55,7 @@ export class CategoryController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Put("/:id")
     async putCategory(@Res() response: Response, @Param('id') id: string, @Body() body: Category) {
         try {
@@ -70,6 +75,7 @@ export class CategoryController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Delete("/:id")
     async deleteCategory(@Res() response: Response, @Param('id') id: string) {
         try {

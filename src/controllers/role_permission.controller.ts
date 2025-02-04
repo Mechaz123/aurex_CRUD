@@ -1,5 +1,6 @@
-import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res, UseGuards } from '@nestjs/common';
 import { Response } from 'express';
+import { AuthenticationGuard } from 'src/guards/authentication.guard';
 import { RolePermission } from 'src/models/role_permission.entity';
 import { RolePermissionService } from 'src/services/role_permission.service';
 
@@ -7,6 +8,7 @@ import { RolePermissionService } from 'src/services/role_permission.service';
 export class RolePermissionController {
     constructor(private readonly rolePermissionService: RolePermissionService) { }
 
+    @UseGuards(AuthenticationGuard)
     @Get("/")
     async getAllRolePermission(@Res() response: Response) {
         try {
@@ -20,6 +22,7 @@ export class RolePermissionController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Get("/:id")
     async getOneRolePermission(@Res() response: Response, @Param('id') id: string) {
         try {
@@ -38,6 +41,7 @@ export class RolePermissionController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Post("/")
     async postRolePermission(@Res() response: Response, @Body() body: Partial<RolePermission>) {
         try {
@@ -51,6 +55,7 @@ export class RolePermissionController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Put("/:id")
     async putRolePermission(@Res() response: Response, @Param('id') id: string, @Body() body: Partial<RolePermission>) {
         try {
@@ -70,6 +75,7 @@ export class RolePermissionController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Delete("/:id")
     async deleteRolePermission(@Res() response: Response, @Param('id') id: string) {
         try {

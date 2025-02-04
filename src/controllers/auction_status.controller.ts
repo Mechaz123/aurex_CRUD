@@ -1,12 +1,14 @@
-import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res, UseGuards } from '@nestjs/common';
 import { AuctionStatusService } from 'src/services/auction_status.service';
 import { Response } from 'express';
 import { AuctionStatus } from 'src/models/auction_status.entity';
+import { AuthenticationGuard } from 'src/guards/authentication.guard';
 
 @Controller('auction_status')
 export class AuctionStatusController {
     constructor(private readonly auctionStatusService: AuctionStatusService) { }
 
+    @UseGuards(AuthenticationGuard)
     @Get("/")
     async getAllAuctionStatus(@Res() response: Response) {
         try {
@@ -20,6 +22,7 @@ export class AuctionStatusController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Get("/:id")
     async getOneAuctionStatus(@Res() response: Response, @Param('id') id: string) {
         try {
@@ -38,6 +41,7 @@ export class AuctionStatusController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Post("/")
     async postAuctionStatus(@Res() response: Response, @Body() body: Partial<AuctionStatus>) {
         try {
@@ -51,6 +55,7 @@ export class AuctionStatusController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Put("/:id")
     async putAuctionStatus(@Res() response: Response, @Param('id') id: string, @Body() body: Partial<AuctionStatus>) {
         try {
@@ -70,6 +75,7 @@ export class AuctionStatusController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Delete("/:id")
     async deleteAuctionStatus(@Res() response: Response, @Param('id') id: string) {
         try {

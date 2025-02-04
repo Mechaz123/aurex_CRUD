@@ -55,6 +55,9 @@ import { OrderService } from './services/order.service';
 import { OrderDetail } from './models/order_detail.entity';
 import { OrderDetailController } from './controllers/order_detail.controller';
 import { OrderDetailService } from './services/order_detail.service';
+import { AuthenticationController } from './controllers/authentication.controller';
+import { AuthenticationService } from './services/authentication.service';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -115,8 +118,13 @@ import { OrderDetailService } from './services/order_detail.service';
       Order,
       OrderDetail
     ]),
+    JwtModule.register({
+      secret: process.env.SECRET_KEY,
+      signOptions: { expiresIn: '1h'}
+    }),
   ],
   controllers: [
+    AuthenticationController,
     UserStatusController,
     RoleController,
     PermissionController,
@@ -137,6 +145,7 @@ import { OrderDetailService } from './services/order_detail.service';
     OrderDetailController
   ],
   providers: [
+    AuthenticationService,
     UserStatusService,
     RoleService,
     PermissionService,

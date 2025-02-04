@@ -1,12 +1,14 @@
-import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res, UseGuards } from '@nestjs/common';
 import { BidService } from 'src/services/bid.service';
 import { Response } from 'express';
 import { Bid } from 'src/models/bid.entity';
+import { AuthenticationGuard } from 'src/guards/authentication.guard';
 
 @Controller('bid')
 export class BidController {
     constructor(private readonly bidService: BidService) { }
 
+    @UseGuards(AuthenticationGuard)
     @Get("/")
     async getAllBid(@Res() response: Response) {
         try {
@@ -20,6 +22,7 @@ export class BidController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Get("/:id")
     async getOneBid(@Res() response: Response, @Param('id') id: string) {
         try {
@@ -38,6 +41,7 @@ export class BidController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Post("/")
     async postBid(@Res() response: Response, @Body() body: Bid) {
         try {
@@ -51,6 +55,7 @@ export class BidController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Put("/:id")
     async putBid(@Res() response: Response, @Param('id') id: string, @Body() body: Bid) {
         try {
@@ -70,6 +75,7 @@ export class BidController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Delete("/:id")
     async deleteBid(@Res() response: Response, @Param('id') id: string) {
         try {

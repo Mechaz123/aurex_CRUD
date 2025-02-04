@@ -1,12 +1,14 @@
-import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res, UseGuards } from '@nestjs/common';
 import { UserStatusService } from 'src/services/user_status.service';
 import { UserStatus } from 'src/models/user_status.entity';
 import { Response } from 'express';
+import { AuthenticationGuard } from 'src/guards/authentication.guard';
 
 @Controller('user_status')
 export class UserStatusController {
     constructor(private readonly userStatusService: UserStatusService) { }
 
+    @UseGuards(AuthenticationGuard)
     @Get("/")
     async getAllUserStatus(@Res() response: Response) {
         try {
@@ -20,6 +22,7 @@ export class UserStatusController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Get("/:id")
     async getOneUserStatus(@Res() response: Response, @Param('id') id: string) {
         try {
@@ -38,6 +41,7 @@ export class UserStatusController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Post("/")
     async postUserStatus(@Res() response: Response, @Body() body: Partial<UserStatus>) {
         try {
@@ -51,6 +55,7 @@ export class UserStatusController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Put("/:id")
     async putUserStatus(@Res() response: Response, @Param('id') id: string, @Body() body: Partial<UserStatus>) {
         try {
@@ -70,6 +75,7 @@ export class UserStatusController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Delete("/:id")
     async deleteUserStatus(@Res() response: Response, @Param('id') id: string) {
         try {

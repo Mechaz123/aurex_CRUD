@@ -1,12 +1,14 @@
-import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res, UseGuards } from '@nestjs/common';
 import { Permission } from 'src/models/permission.entity';
 import { PermissionService } from 'src/services/permission.service';
 import { Response } from 'express';
+import { AuthenticationGuard } from 'src/guards/authentication.guard';
 
 @Controller('permission')
 export class PermissionController {
     constructor(private readonly permissionService: PermissionService) { }
 
+    @UseGuards(AuthenticationGuard)
     @Get("/")
     async getAllPermission(@Res() response: Response) {
         try {
@@ -20,6 +22,7 @@ export class PermissionController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Get("/:id")
     async getOnePermission(@Res() response: Response, @Param('id') id: string) {
         try {
@@ -38,6 +41,7 @@ export class PermissionController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Post("/")
     async postPermission(@Res() response: Response, @Body() body: Permission) {
         try {
@@ -51,6 +55,7 @@ export class PermissionController {
         return response;
     }
 
+    @UseGuards(AuthenticationGuard)
     @Put("/:id")
     async putPermission(@Res() response: Response, @Param('id') id: string, @Body() body: Permission) {
         try {
@@ -69,7 +74,7 @@ export class PermissionController {
         }
         return response;
     }
-
+    @UseGuards(AuthenticationGuard)
     @Delete("/:id")
     async deletePermission(@Res() response: Response, @Param('id') id: string) {
         try {
