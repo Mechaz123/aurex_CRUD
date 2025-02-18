@@ -15,12 +15,12 @@ export class RoleService {
     }
 
     async findOneRole(id: number): Promise<Role> {
-        return await this.roleRepository.findOneBy({ id })
+        return await this.roleRepository.findOneBy({ id });
     }
 
     async createRole(Role: Partial<Role>): Promise<Role> {
         const newRole = await this.roleRepository.create(Role);
-        return await this.roleRepository.save(newRole)
+        return await this.roleRepository.save(newRole);
     }
 
     async updateRole(id: number, Role: Partial<Role>): Promise<Role> {

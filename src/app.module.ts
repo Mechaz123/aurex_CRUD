@@ -28,15 +28,6 @@ import { ProductStatusController } from './controllers/product_status.controller
 import { Product } from './models/product.entity';
 import { ProductService } from './services/product.service';
 import { ProductController } from './controllers/product.controller';
-import { TransactionStatus } from './models/transaction_status.entity';
-import { TransactionStatusService } from './services/transaction_status.service';
-import { TransactionStatusController } from './controllers/transaction_status.controller';
-import { Transaction } from './models/transaction.entity';
-import { TransactionService } from './services/transaction.service';
-import { TransactionController } from './controllers/transaction.controller';
-import { TransactionDetail } from './models/transaction_detail.entity';
-import { TransactionDetailController } from './controllers/transaction_detail.controller';
-import { TransactionDetailService } from './services/transaction_detail.service';
 import { AuctionStatus } from './models/auction_status.entity';
 import { AuctionStatusService } from './services/auction_status.service';
 import { AuctionStatusController } from './controllers/auction_status.controller';
@@ -58,6 +49,24 @@ import { OrderDetailService } from './services/order_detail.service';
 import { AuthenticationController } from './controllers/authentication.controller';
 import { AuthenticationService } from './services/authentication.service';
 import { JwtModule } from '@nestjs/jwt';
+import { ExchangeStatus } from './models/exchange_status.entity';
+import { ExchangeHistory } from './models/exchange_history.entity';
+import { Exchange } from './models/exchange.entity';
+import { Credit } from './models/credit.entity';
+import { CreditBlock } from './models/credit_block.entity';
+import { TransactionHistory } from './models/transaction_history.entity';
+import { ExchangeStatusController } from './controllers/exchange_status.controller';
+import { ExchangeStatusService } from './services/exchange_status.service';
+import { ExchangeHistoryController } from './controllers/exchange_history.controller';
+import { ExchangeHistoryService } from './services/exchange_history.service';
+import { ExchangeController } from './controllers/exchange.controller';
+import { ExchangeService } from './services/exchange.service';
+import { CreditController } from './controllers/credit.controller';
+import { CreditService } from './services/credit.service';
+import { CreditBlockController } from './controllers/credit_block.controller';
+import { CreditBlockService } from './services/credit_block.service';
+import { TransactionHistoryController } from './controllers/transaction_history.controller';
+import { TransactionHistoryService } from './services/transaction_history.service';
 
 @Module({
   imports: [
@@ -83,15 +92,18 @@ import { JwtModule } from '@nestjs/jwt';
           Category,
           ProductStatus,
           Product,
-          TransactionStatus,
-          Transaction,
-          TransactionDetail,
           AuctionStatus,
           Auction,
           Bid,
           OrderStatus,
           Order,
-          OrderDetail
+          OrderDetail,
+          ExchangeStatus,
+          ExchangeHistory,
+          Exchange,
+          Credit,
+          CreditBlock,
+          TransactionHistory
         ],
         synchronize: true,
         timezone: 'Z',
@@ -108,19 +120,22 @@ import { JwtModule } from '@nestjs/jwt';
       Category,
       ProductStatus,
       Product,
-      TransactionStatus,
-      Transaction,
-      TransactionDetail,
       AuctionStatus,
       Auction,
       Bid,
       OrderStatus,
       Order,
-      OrderDetail
+      OrderDetail,
+      ExchangeStatus,
+      ExchangeHistory,
+      Exchange,
+      Credit,
+      CreditBlock,
+      TransactionHistory
     ]),
     JwtModule.register({
       secret: process.env.SECRET_KEY,
-      signOptions: { expiresIn: '1h'}
+      signOptions: { expiresIn: '1h' }
     }),
   ],
   controllers: [
@@ -134,15 +149,18 @@ import { JwtModule } from '@nestjs/jwt';
     CategoryController,
     ProductStatusController,
     ProductController,
-    TransactionStatusController,
-    TransactionController,
-    TransactionDetailController,
     AuctionStatusController,
     AuctionController,
     BidController,
     OrderStatusController,
     OrderController,
-    OrderDetailController
+    OrderDetailController,
+    ExchangeStatusController,
+    ExchangeHistoryController,
+    ExchangeController,
+    CreditController,
+    CreditBlockController,
+    TransactionHistoryController
   ],
   providers: [
     AuthenticationService,
@@ -155,15 +173,18 @@ import { JwtModule } from '@nestjs/jwt';
     CategoryService,
     ProductStatusService,
     ProductService,
-    TransactionStatusService,
-    TransactionService,
-    TransactionDetailService,
     AuctionStatusService,
     AuctionService,
     BidService,
     OrderStatusService,
     OrderService,
-    OrderDetailService
+    OrderDetailService,
+    ExchangeStatusService,
+    ExchangeHistoryService,
+    ExchangeService,
+    CreditService,
+    CreditBlockService,
+    TransactionHistoryService
   ],
 })
 export class AppModule { }

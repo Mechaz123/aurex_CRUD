@@ -2,9 +2,9 @@ import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, Pri
 import { User } from "./user.entity";
 import { Category } from "./category.entity";
 import { ProductStatus } from "./product_status.entity";
-import { TransactionDetail } from "./transaction_detail.entity";
 import { Auction } from "./auction.entity";
 import { OrderDetail } from "./order_detail.entity";
+import { Exchange } from "./exchange.entity";
 
 @Entity()
 export class Product {
@@ -44,6 +44,12 @@ export class Product {
     })
     image_url: string;
 
+    @Column({
+        length: 45,
+        nullable: false
+    })
+    tag: string;
+    
     @CreateDateColumn()
     created_at: Date;
 
@@ -62,12 +68,15 @@ export class Product {
     @JoinColumn({ name: 'product_status_id' })
     product_status: ProductStatus;
 
-    @OneToMany(() => TransactionDetail, (transactionDetail) => transactionDetail.product)
-    productDetails: TransactionDetail[];
-
     @OneToMany(() => Auction, (auction) => auction.product)
     productAuctions: Product[];
 
     @OneToMany(() => OrderDetail, (orderDetail) => orderDetail.product)
     productOrderDetails: OrderDetail[];
+
+    @OneToMany(() => Exchange, (exchange) => exchange.requesting_product)
+    productRequestingExchanges: Exchange[];
+
+    @OneToMany(() => Exchange, (exchange) => exchange.receiving_product)
+    productReceivingExchanges: Exchange[];
 }

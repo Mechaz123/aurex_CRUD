@@ -18,6 +18,14 @@ export class Auction {
     initial_price: number;
 
     @Column({
+        type: 'decimal',
+        precision: 10,
+        scale: 2,
+        nullable: false
+    })
+    current_price: number;
+
+    @Column({
         type: 'timestamp',
         nullable: false
     })

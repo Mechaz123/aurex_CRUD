@@ -1,7 +1,9 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { User } from "./user.entity";
 import { OrderStatus } from "./order_status.entity";
 import { OrderDetail } from "./order_detail.entity";
+import { TransactionHistory } from "./transaction_history.entity";
+import { CreditBlock } from "./credit_block.entity";
 
 @Entity()
 export class Order {
@@ -36,4 +38,10 @@ export class Order {
 
     @OneToMany(() => OrderDetail, (orderDetail) => orderDetail.order)
     orderDetails: OrderDetail[];
+
+    @OneToMany(() => TransactionHistory, (transactionHistory) => transactionHistory.order)
+    orderTransactionHistory: TransactionHistory[];
+
+    @OneToOne(() => CreditBlock, (creditBlock) => creditBlock.order)
+    creditBlock: CreditBlock;
 }
