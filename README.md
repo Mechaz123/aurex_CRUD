@@ -1,9 +1,9 @@
-# aurex_CRUD
-:heavy_check_mark: Check: Repository api CRUD for AUREX.
+# AUREX_CRUD
+:heavy_check_mark: Check: Repositorio api CRUD para AUREX.
 
-## Technical Specifications
+## Especificaciones Tecnicas
 
-### Implemented technologies
+### Tecnologías implementadas
 
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
@@ -11,48 +11,39 @@
 
 <p align="Center">Nest.js</p>
 
-### Environment variables
+### Variables de entorno
 ```bash
-# API parameters
-AUREX_CRUD_HTTP_PORT=[API exposure port]
-# Parameters of database
-DB_HOST=[URL, Domain or DB EndPoint]
-DB_PORT=[DB Port]
-DB_USERNAME=[DB User]
-DB_PASSWORD=[DB user password]
-DB_DATABASE=[Database name]
+# API parametros
+AUREX_CRUD_HTTP_PORT=[Puerto expuesto para el API]
+# Parameters de base de datos
+DB_HOST=[URL, Dominio o endpoint de base de datos]
+DB_PORT=[Puerto de base de datos]
+DB_USERNAME=[Usuario de base de datos]
+DB_PASSWORD=[Contraseña de usuario de base de datos]
+DB_DATABASE=[Nombre de base de datos]
 ```
 
-## Compile and run the project
+## Compilación y ejecución del proyecto
 
 ```bash
-# development
+# Pruebas
 $ npm run start
 
-# watch mode
+# Desarrollo
 $ npm run start:dev
 
-# production mode
+# Modo producción
 $ npm run start:prod
 ```
-## Data model
+## Modelo de datos
 
-<img src="database/FINAL_MODEL_DB.png" alt="DATABASE MODEL">
+<img src="database/MODELO_FINAL_BD.png" alt="MODELO DE BASE DE DATOS">
 
-## Deployment
+## Despliegue
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+Actualmente el sistema se encuentra conectado con el entorno de Azure, de tal forma que cualquier cambio que se suba en la rama de develop, este se sincronizará automáticamente con los archivos en Azure, de manera que en Github Actions, podremos ver el proceso de despliegue de dichos cambios.
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g mau
-$ mau deploy
-```
-
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
-
-## Resources
+## Recursos
 
 Check out a few resources that may come in handy when working with NestJS:
 
