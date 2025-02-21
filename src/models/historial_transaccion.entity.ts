@@ -23,6 +23,12 @@ export class HistorialTransaccion {
 
     @Column({
         nullable: false,
+        default: false
+    })
+    confirmacion: boolean;
+
+    @Column({
+        nullable: false,
         default: true
     })
     activo: boolean;
