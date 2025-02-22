@@ -15,12 +15,19 @@
 ```bash
 # API parametros
 AUREX_CRUD_HTTP_PORT=[Puerto expuesto para el API]
-# Parameters de base de datos
+SECRET_KEY=[Clave secreta para los Tokens]
+# Parametros de base de datos
 DB_HOST=[URL, Dominio o endpoint de base de datos]
 DB_PORT=[Puerto de base de datos]
 DB_USERNAME=[Usuario de base de datos]
 DB_PASSWORD=[Contraseña de usuario de base de datos]
 DB_DATABASE=[Nombre de base de datos]
+```
+
+## Configuración del proyecto
+
+```bash
+$ npm install
 ```
 
 ## Compilación y ejecución del proyecto
