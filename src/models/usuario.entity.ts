@@ -64,7 +64,7 @@ export class Usuario {
     pais: string;
 
     @Column({
-        length: 255,
+        type:'mediumtext',
         nullable: true,
     })
     imagen_url: string;

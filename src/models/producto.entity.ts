@@ -39,7 +39,7 @@ export class Producto {
     existencias: number;
 
     @Column({
-        length: 255,
+        type:'mediumtext',
         nullable: true,
     })
     imagen_url: string;
