@@ -1,5 +1,5 @@
 import { EstadoUsuario } from "./estado_usuario.entity"
-import { BeforeInsert, BeforeUpdate, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
+import { BeforeInsert, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
 import * as bcrypt from "bcrypt";
 import { UsuarioRol } from "./usuario_rol.entity";
 import { Producto } from "./producto.entity";
@@ -101,8 +101,11 @@ export class Usuario {
     credito: Credito;
 
     @BeforeInsert()
-    @BeforeUpdate()
-    async hashClave() {
+    async hashClaveBeforeInsert(){
+        await this.hashClave();
+    }
+
+    private async hashClave() {
         if (this.clave) {
             const salt = await bcrypt.genSalt(10);
             this.clave = await bcrypt.hash(this.clave, salt);
